@@ -7,9 +7,6 @@ desktop:
 
 android:
 	OOC_LIBS=${OOC_LIBS}/ooc-sdl2/uses/mobile:${OOC_LIBS} $(ROCK) $(OOC_FLAGS) -driver=android --outpath=android/jni
-	cd android
-	ndk-build
-	ant debug
 
 clean:
 	$(ROCK) -x
