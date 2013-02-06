@@ -1,7 +1,7 @@
 Name: swoon
 Version: 0.1
-Description: 
-Pkgs: 
-Includes: 
+Description: A game of love and loss.
 SourcePath: source
+Requires: sdl2, dye
+Main: game.ooc
 
