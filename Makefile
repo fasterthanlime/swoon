@@ -1,5 +1,5 @@
 
-OOC_FLAGS := -v
+OOC_FLAGS := -v -g
 ROCK := rock
 
 desktop:

@@ -64,7 +64,6 @@ App: class {
     color := Color new(240, 128, 128)
 
     while (running) {
-        SDL delay(16)
         dye poll()
 
         if (!paused) {
@@ -79,6 +78,9 @@ App: class {
                 }
             }
         }
+
+        //SDL delay(16)
+        SDL delay(500)
     }
   }
 
