@@ -69,10 +69,12 @@ App: class {
             dye setClearColor(color)
             dye render()
 
-            color r += increment
-            if (color r > 255 || color r < 0) {
-                color r -= increment
-                increment = -increment
+            if (dye input isPressed(KeyCode MENU)) {
+                color r += increment
+                if (color r > 255 || color r < 0) {
+                    color r -= increment
+                    increment = -increment
+                }
             }
         }
     }
