@@ -9,7 +9,7 @@ version (android) {
 
 use dye, sdl2
 import sdl2/Core
-import dye/[core, input, primitives]
+import dye/[core, input, primitives, math]
 
 // sdk stuff
 import structs/[ArrayList]
@@ -53,7 +53,10 @@ App: class {
         running = false
     )
 
-    dye add(GlRectangle new())
+    rect := GlRectangle new()
+    rect size set!(1, 1)
+    rect rebuild()
+    dye add(rect)
 
     run()
     dye quit()
@@ -70,7 +73,7 @@ App: class {
             dye setClearColor(color)
             dye render()
 
-            if (dye input isPressed(KeyCode MENU)) {
+            if (dye input isPressed(KeyCode MENU) || dye input isPressed(KeyCode SPACE)) {
                 color r += increment
                 if (color r > 255 || color r < 0) {
                     color r -= increment
@@ -79,8 +82,8 @@ App: class {
             }
         }
 
-        //SDL delay(16)
-        SDL delay(500)
+        SDL delay(16)
+        //SDL delay(500)
     }
   }
 
