@@ -9,7 +9,7 @@ version (android) {
 
 use dye, sdl2
 import sdl2/Core
-import dye/[core, input]
+import dye/[core, input, primitives]
 
 // sdk stuff
 import structs/[ArrayList]
@@ -52,6 +52,8 @@ App: class {
     dye input onExit(||
         running = false
     )
+
+    dye add(GlRectangle new())
 
     run()
     dye quit()
