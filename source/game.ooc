@@ -3,8 +3,13 @@
 use deadlogger
 import deadlogger/[Log, Logger, Handler, Formatter, Filter, Level]
 
+version (android) {
+    import deadlogger/AndroidHandler
+}
+
 use dye, sdl2
 import sdl2/Core
+import dye/[core, input]
 
 // sdk stuff
 import structs/[ArrayList]
@@ -18,40 +23,76 @@ App: class {
   logger: Logger
   dye: DyeContext
 
+  paused := false
+  running := true
+
   init: func {
     initLogging()
     logger info("Starting swoon...")
 
     dye = DyeContext new(480, 800, "swoon")
+    dye input debug = true
+
+    dye input onWindowMinimized(||
+        paused = true
+    )
+
+    dye input onWindowRestored(||
+        paused = false
+    )
+
+    // on Android, the back key quits
+    dye input onKeyPress(|kev|
+        match (kev scancode) {
+            case KeyCode AC_BACK || KeyCode ESC =>
+                running = false
+        }
+    )
+
+    dye input onExit(||
+        running = false
+    )
 
     run()
-    exit()
+    dye quit()
   }
 
   run: func {
-    dye setClearColor(Color new(240, 128, 128))
-    dye render()
+    increment := 5
+    color := Color new(240, 128, 128)
 
-    while (true) {
-        SDL delay(1000)
+    while (running) {
+        SDL delay(16)
+        dye poll()
+
+        if (!paused) {
+            dye setClearColor(color)
+            dye render()
+
+            color r += increment
+            if (color r > 255 || color r < 0) {
+                color r -= increment
+                increment = -increment
+            }
+        }
     }
-  }
-
-  exit: func {
-    dye quit()
-    exit(0)
   }
 
   initLogging: func {
-    // log to console
-    console := StdoutHandler new()
-    formatter := NiceFormatter new()
-    version (!windows && !android) {
-        formatter = ColoredFormatter new(formatter)
+    version (android) {
+        // log to Android handler
+        Log root attachHandler(AndroidHandler new())
+    } else {
+        // log to console
+        console := StdoutHandler new()
+        formatter := NiceFormatter new()
+        version (!windows) {
+            formatter = ColoredFormatter new(formatter)
+        }
+        console setFormatter(formatter)
+        console setFilter(LevelFilter new(Level info..Level critical))
+        Log root attachHandler(console)
     }
-    console setFormatter(formatter)
-    console setFilter(LevelFilter new(Level info..Level critical))
-    Log root attachHandler(console)
   
     logger = Log getLogger("Swoon")
   }
