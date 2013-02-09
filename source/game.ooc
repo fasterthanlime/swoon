@@ -9,7 +9,7 @@ version (android) {
 
 use dye, sdl2
 import sdl2/Core
-import dye/[core, input, primitives, math]
+import dye/[core, input, primitives, sprite, math]
 
 // sdk stuff
 import structs/[ArrayList]
@@ -53,10 +53,16 @@ App: class {
         running = false
     )
 
+    /*
     rect := GlRectangle new()
     rect size set!(1, 1)
     rect rebuild()
     dye add(rect)
+    */
+
+    //sprite := GlSprite new("assets/png/domino.png")
+    sprite := GlSprite new("assets/png/swoon-sleepy.png")
+    dye add(sprite)
 
     run()
     dye quit()
@@ -82,8 +88,8 @@ App: class {
             }
         }
 
-        SDL delay(16)
-        //SDL delay(500)
+        //SDL delay(16)
+        SDL delay(500)
     }
   }
 
@@ -99,7 +105,7 @@ App: class {
             formatter = ColoredFormatter new(formatter)
         }
         console setFormatter(formatter)
-        console setFilter(LevelFilter new(Level info..Level critical))
+        //console setFilter(LevelFilter new(Level info..Level critical))
         Log root attachHandler(console)
     }
   
