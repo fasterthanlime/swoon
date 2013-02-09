@@ -53,15 +53,13 @@ App: class {
         running = false
     )
 
-    /*
     rect := GlRectangle new()
     rect size set!(1, 1)
     rect rebuild()
     dye add(rect)
-    */
 
-    //sprite := GlSprite new("assets/png/domino.png")
-    sprite := GlSprite new("assets/png/swoon-sleepy.png")
+    texPath := "assets/png/swoon-sleepy.png"
+    sprite := GlSprite new(texPath)
     dye add(sprite)
 
     run()
