@@ -54,7 +54,7 @@ App: class {
     )
 
     rect := GlRectangle new()
-    rect size set!(1, 1)
+    rect size set!(256, 256)
     rect rebuild()
     dye add(rect)
 
@@ -76,7 +76,7 @@ App: class {
 
   run: func {
     increment := 5
-    color := Color new(240, 128, 128)
+    color := Color new(0, 0, 0)
 
     while (running) {
         dye poll()
@@ -87,8 +87,11 @@ App: class {
 
             if (dye input isPressed(KeyCode MENU) || dye input isPressed(KeyCode SPACE)) {
                 color r += increment
+                color g = color b = color r
+
                 if (color r > 255 || color r < 0) {
                     color r -= increment
+
                     increment = -increment
                 }
             }
