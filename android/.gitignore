@@ -27,6 +27,7 @@ jni/gnaar/*
 jni/yaml/*
 
 jni/gc/*
-jni/libchipmunk/*
+jni/c_chipmunk/*
+jni/c_yaml/*
 
 !res/*/*.xml
