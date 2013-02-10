@@ -23,6 +23,8 @@ jni/stbi/*
 jni/swoon/*
 jni/sdk/*
 jni/chipmunk/*
+jni/gnaar/*
+jni/yaml/*
 
 jni/gc/*
 jni/libchipmunk/*
