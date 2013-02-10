@@ -26,6 +26,8 @@ App: class {
   paused := false
   running := true
 
+  sprite: GlSprite
+
   init: func {
     initLogging()
     logger info("Starting swoon...")
@@ -61,12 +63,10 @@ App: class {
         dye add(rect)
     }
 
-    {
-        texPath := "assets/png/swoon-sleepy.png"
-        sprite := GlSprite new(texPath)
-        sprite pos set!(100, 100)
-        dye add(sprite)
-    }
+    texPath := "assets/png/swoon-sleepy.png"
+    sprite = GlSprite new(texPath)
+    sprite pos set!(100, 100)
+    dye add(sprite)
 
     {
         texPath := "assets/png/swoon-sleepy-small.png"
@@ -121,8 +121,10 @@ App: class {
             }
         }
 
-        //SDL delay(16)
-        SDL delay(500)
+        sprite pos set!(dye input getMousePos())
+
+        SDL delay(16)
+        //SDL delay(500)
     }
   }
 
@@ -138,7 +140,7 @@ App: class {
             formatter = ColoredFormatter new(formatter)
         }
         console setFormatter(formatter)
-        //console setFilter(LevelFilter new(Level info..Level critical))
+        console setFilter(LevelFilter new(Level info..Level critical))
         Log root attachHandler(console)
     }
   
