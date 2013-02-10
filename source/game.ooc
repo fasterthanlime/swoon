@@ -1,22 +1,22 @@
 
 // third-party stuff
 use deadlogger
-import deadlogger/[Log, Logger, Handler, Formatter, Filter, Level]
+import deadlogger/[Log, Logger]
 
-version (android) {
-    import deadlogger/AndroidHandler
-}
-
-use dye, sdl2
-import sdl2/Core
+use dye
 import dye/[core, input, primitives, sprite, math]
+
+use sdl2
+import sdl2/Core
+
+use chipmunk
+import chipmunk
 
 // sdk stuff
 import structs/[ArrayList]
 
-main: func (args: ArrayList<String>) {
-  App new()
-}
+// our stuff
+import swoon/[logging, level, ball]
 
 App: class {
 
@@ -25,15 +25,29 @@ App: class {
 
   paused := false
   running := true
-
-  sprite: GlSprite
+  
+  level: Level
 
   init: func {
-    initLogging()
+    Logging setup()
+
+    logger = Log getLogger("Swoon")
     logger info("Starting swoon...")
 
     dye = DyeContext new(480, 800, "swoon")
-    dye input debug = true
+
+    initEvents()
+
+    level = Level new()
+    dye add(level group)
+
+    level add(Ball new(level))
+
+    run()
+    dye quit()
+  }
+
+  initEvents: func {
 
     dye input onWindowMinimized(||
         paused = true
@@ -55,98 +69,29 @@ App: class {
         running = false
     )
 
-    {
-        rect := GlRectangle new()
-        rect size set!(256, 256)
-        rect center!(dye)
-        rect rebuild()
-        dye add(rect)
-    }
-
-    texPath := "assets/png/swoon-sleepy.png"
-    sprite = GlSprite new(texPath)
-    sprite pos set!(100, 100)
-    dye add(sprite)
-
-    {
-        texPath := "assets/png/swoon-sleepy-small.png"
-        sprite := GlSprite new(texPath)
-        sprite pos set!(350, 350)
-        sprite angle = 45
-        sprite scale set!(2, 2)
-        dye add(sprite)
-    }
-
-    {
-        texPath := "assets/png/swoon-sleepy-small.png"
-        sprite := GlSprite new(texPath)
-        sprite pos set!(300, 300)
-        sprite angle = 90
-        sprite scale set!(2, 2)
-        dye add(sprite)
-    }
-
-    {
-        texPath := "assets/png/swoon-sleepy-small.png"
-        sprite := GlSprite new(texPath)
-        sprite pos set!(300, 300)
-        sprite angle = 90
-        dye add(sprite)
-    }
-
-    run()
-    dye quit()
   }
 
   run: func {
-    increment := 5
     color := Color new(0, 0, 0)
+    dye setClearColor(color)
 
     while (running) {
         dye poll()
 
         if (!paused) {
-            dye setClearColor(color)
+            level update()
             dye render()
-
-            if (dye input isPressed(KeyCode MENU) || dye input isPressed(KeyCode SPACE)) {
-                color r += increment
-                color g = color b = color r
-
-                if (color r > 255 || color r < 0) {
-                    color r -= increment
-
-                    increment = -increment
-                }
-            }
         }
-
-        sprite pos set!(dye input getMousePos())
 
         SDL delay(16)
-        //SDL delay(500)
     }
   }
 
-  initLogging: func {
-    version (android) {
-        // log to Android handler
-        Log root attachHandler(AndroidHandler new())
-    } else {
-        // log to console
-        console := StdoutHandler new()
-        formatter := NiceFormatter new()
-        version (!windows) {
-            formatter = ColoredFormatter new(formatter)
-        }
-        console setFormatter(formatter)
-        console setFilter(LevelFilter new(Level info..Level critical))
-        Log root attachHandler(console)
-    }
-  
-    logger = Log getLogger("Swoon")
-  }
 
+}
 
+/* Entry point */
+main: func (args: ArrayList<String>) {
+  App new()
 }
 
