@@ -53,20 +53,44 @@ App: class {
         running = false
     )
 
-    rect := GlRectangle new()
-    rect size set!(256, 256)
-    rect rebuild()
-    dye add(rect)
+    {
+        rect := GlRectangle new()
+        rect size set!(256, 256)
+        rect center!(dye)
+        rect rebuild()
+        dye add(rect)
+    }
 
     {
         texPath := "assets/png/swoon-sleepy.png"
         sprite := GlSprite new(texPath)
+        sprite pos set!(100, 100)
         dye add(sprite)
     }
 
     {
         texPath := "assets/png/swoon-sleepy-small.png"
         sprite := GlSprite new(texPath)
+        sprite pos set!(350, 350)
+        sprite angle = 45
+        sprite scale set!(2, 2)
+        dye add(sprite)
+    }
+
+    {
+        texPath := "assets/png/swoon-sleepy-small.png"
+        sprite := GlSprite new(texPath)
+        sprite pos set!(300, 300)
+        sprite angle = 90
+        sprite scale set!(2, 2)
+        dye add(sprite)
+    }
+
+    {
+        texPath := "assets/png/swoon-sleepy-small.png"
+        sprite := GlSprite new(texPath)
+        sprite pos set!(300, 300)
+        sprite angle = 90
         dye add(sprite)
     }
 
@@ -97,8 +121,8 @@ App: class {
             }
         }
 
-        SDL delay(16)
-        //SDL delay(500)
+        //SDL delay(16)
+        SDL delay(500)
     }
   }
 
