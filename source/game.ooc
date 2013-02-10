@@ -58,9 +58,17 @@ App: class {
     rect rebuild()
     dye add(rect)
 
-    texPath := "assets/png/swoon-sleepy.png"
-    sprite := GlSprite new(texPath)
-    dye add(sprite)
+    {
+        texPath := "assets/png/swoon-sleepy.png"
+        sprite := GlSprite new(texPath)
+        dye add(sprite)
+    }
+
+    {
+        texPath := "assets/png/swoon-sleepy-small.png"
+        sprite := GlSprite new(texPath)
+        dye add(sprite)
+    }
 
     run()
     dye quit()
@@ -86,8 +94,8 @@ App: class {
             }
         }
 
-        //SDL delay(16)
-        SDL delay(500)
+        SDL delay(16)
+        //SDL delay(500)
     }
   }
 
