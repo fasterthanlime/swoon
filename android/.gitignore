@@ -17,11 +17,14 @@ proguard-project.txt
 
 jni/SDL
 jni/deadlogger/*
-jni/gc/*
 jni/dye/*
 jni/sdl2/*
 jni/stbi/*
 jni/swoon/*
 jni/sdk/*
+jni/chipmunk/*
+
+jni/gc/*
+jni/libchipmunk/*
 
 !res/*/*.xml
