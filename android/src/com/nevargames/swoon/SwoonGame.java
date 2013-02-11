@@ -12,6 +12,9 @@ public class SwoonGame extends SDLActivity {
         System.loadLibrary("sdl2");
         System.loadLibrary("stbi");
         System.loadLibrary("dye");
+        System.loadLibrary("yaml");
+        System.loadLibrary("chipmunk");
+        System.loadLibrary("gnaar");
         System.loadLibrary("swoon");
         System.loadLibrary("main");
     }
