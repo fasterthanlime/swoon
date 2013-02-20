@@ -2,6 +2,6 @@ Name: swoon
 Version: 0.1
 Description: A game of love and loss.
 SourcePath: source
-Requires: sdl2, dye
+Requires: sdl2, dye, gnaar, yaml, deadlogger
 Main: game.ooc
 
