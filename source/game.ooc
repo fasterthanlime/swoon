@@ -34,7 +34,7 @@ App: class {
     logger = Log getLogger("Swoon")
     logger info("Starting swoon...")
 
-    dye = DyeContext new(480, 800, "swoon")
+    dye = DyeContext new(1920, 1080, "swoon")
 
     initEvents()
 

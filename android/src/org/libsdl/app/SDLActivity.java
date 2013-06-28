@@ -60,7 +60,13 @@ public class SDLActivity extends Activity {
 
     // Setup
     protected void onCreate(Bundle savedInstanceState) {
-        //Log.v("SDL", "onCreate()");
+        Log.v("SDL", "onCreate()");
+        try {
+            Thread.sleep(8000L);
+        } catch (Exception e) {
+            // nah.
+        }
+
         super.onCreate(savedInstanceState);
         
         // So we can call stuff from static callbacks

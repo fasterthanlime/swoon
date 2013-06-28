@@ -26,10 +26,12 @@ jni/gnaar/*
 jni/yaml/*
 jni/freetype2/*
 jni/stb-image/*
-jni/stbi/*
 
 jni/gc/*
 jni/c_chipmunk/*
 jni/c_yaml/*
+jni/c_freetype2/*
+
+libs/
 
 !res/*/*.xml
