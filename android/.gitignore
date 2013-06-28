@@ -19,12 +19,14 @@ jni/SDL
 jni/deadlogger/*
 jni/dye/*
 jni/sdl2/*
-jni/stbi/*
 jni/swoon/*
 jni/sdk/*
 jni/chipmunk/*
 jni/gnaar/*
 jni/yaml/*
+jni/freetype2/*
+jni/stb-image/*
+jni/stbi/*
 
 jni/gc/*
 jni/c_chipmunk/*
