@@ -61,8 +61,9 @@ public class SDLActivity extends Activity {
     // Setup
     protected void onCreate(Bundle savedInstanceState) {
         Log.v("SDL", "onCreate()");
+
         try {
-            Thread.sleep(8000L);
+            //Thread.sleep(8000L);
         } catch (Exception e) {
             // nah.
         }
